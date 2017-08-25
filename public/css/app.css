@@ -1,0 +1,11 @@
+.navbar {
+  margin-bottom: 0 40px; }
+  .navbar .navbar-brand ul {
+    margin: 10px; }
+    .navbar .navbar-brand ul li a:hover, .navbar .navbar-brand ul .active {
+      border-bottom: 2px #00c4a7 solid;
+      background-color: white; }
+  .navbar .navbar-brand li {
+    margin: 0 8px; }
+
+/*# sourceMappingURL=app.css.map */

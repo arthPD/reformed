@@ -1,0 +1,17 @@
+.navbar {
+	margin-bottom: 0 40px;
+
+	.navbar-brand {
+		ul {
+			margin: 10px;
+
+			li a:hover, .active{
+				border-bottom: 2px #00c4a7 solid;
+				background-color: white;
+			}
+		}
+		li {
+			margin: 0 8px;
+		}
+	}
+}
