@@ -98,7 +98,6 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
         if($user->username !== $request->username){
             $this->validate(request(), [
 
@@ -128,8 +127,17 @@ class MemberController extends Controller
             ]);
         }
 
-        $request->password = \Hash::make($request->password);
-        User::find($id)->update(request(['name','username','password','contact_number','address','email_address','birthday']));
+        $user->name = $request->name;
+        $user->username = $request->username;
+        if(!empty($request->password)){
+            $user->password = \Hash::make($request->password);
+        }
+        $user->contact_number = $request->contact_number;
+        $user->address = $request->address;
+        $user->email_address = $request->email_address;
+        $user->birthday = $request->birthday;
+        $user->save();
+        //User::find($id)->update(request(['name','username','password','contact_number','address','email_address','birthday']));
 
         return redirect('/users')->with('message', ['success', 'Account updated!']);
     }
@@ -142,6 +150,18 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect('/users')->with('message', ['success', "Account deleted!"]);
+    }
+
+    public function addPledgor(Request $request){
+        
+        $member = User::findOrFail($request->id);
+        $member->amount = $request->amount;
+        $member->isPledgor = 1;
+        $member->save();
+        return redirect('/users')->with('message', ['success', "Added as pledgor successfully!"]);
     }
 }

@@ -15,13 +15,16 @@
     <body class="container">
         <nav class="navbar">
             <div class="navbar-brand">
-                <ul style="display: inline-flex;">
-                    <!-- <a class="navbar-item" href="/"><img src="images/logo.png" width="112" height="28"></a> -->
-                    <li {{ Request::is('dashboard') ? "class=active" : null }}><a class="navbar-item" href="/dashboard">Home</a></li>
-                    <li {{ Request::is('users') ? "class=active" : null }}><a class="navbar-item" href="/users">Members</a></li>
-                    <li {{ Request::is('finance') ? "class=active" : null }}><a class="navbar-item" href="/finance">F</a></li>
-                    {{-- <li {{ Request::is('setting') ? "class=active" : null }}><a class="navbar-item" href="dashboard">Setting</a></li> --}}
-            </ul>
+                @if (Auth::check())
+                    <ul style="display: inline-flex;">
+                        <!-- <a class="navbar-item" href="/"><img src="images/logo.png" width="112" height="28"></a> -->
+                        <li {{ Request::is('dashboard') ? "class=active" : null }}><a class="navbar-item" href="/dashboard">Home</a></li>
+                        <li {{ Request::is('users') ? "class=active" : null }}><a class="navbar-item" href="/users">Members</a></li>
+                        <li {{ Request::is('finance') ? "class=active" : null }}><a class="navbar-item" href="/finance">F</a></li>
+                        <li {{ Request::is('reports') ? "class=active" : null }}><a class="navbar-item" href="/reports">Reports</a></li>
+                        {{-- <li {{ Request::is('setting') ? "class=active" : null }}><a class="navbar-item" href="dashboard">Setting</a></li> --}}
+                    </ul>
+                @endif
             </div>
         </nav>
         @yield('body')
@@ -30,6 +33,7 @@
 </html>
     <script src="{{ URL::asset('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ URL::asset('js/vue.js') }}"></script>
+    <script src="{{ URL::asset('js/moment.js')}}"></script>
     <script src="{{ URL::asset('js/app.js') }}"></script>
     <script src="{{ URL::asset('js/bootstrap-datepicker.min.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -39,6 +43,7 @@
                 "closeButton": true,
             }
             toastr.{{session('message')[0]}}("{{session('message')[1]}}");
+            {{session()->forget('message')}}
         @endif
 
         $( document ).ready(function() {    

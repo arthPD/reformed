@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'birthday', 'email_address', 'address', 'contact_number', 'published_at',
+        'name', 'username', 'email', 'birthday', 'email_address', 'address', 'contact_number', 'published_at', 'isPledgor', 'amount', 'password',
     ];
 
     /**
@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function recordpledge(){
+
+        return $this->belongsToMany('App\Recordpledge', 'breakdowns');
+    }
 }

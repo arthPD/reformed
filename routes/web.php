@@ -28,6 +28,17 @@ Route::get('dashboard', function(){
 	return view('blades.dashboard', compact('users'));
 })->middleware('auth');
 
+/*Users*/
 Route::resource('users', 'MemberController');
+Route::get('users/{id}/delete', "MemberController@destroy");
+Route::post('addPledgor', "MemberController@addPledgor");
 
+/*Finance*/
 Route::get('finance', 'FinanceController@index');
+Route::get('newRecord', 'FinanceController@newRecord')->middleware('auth');
+Route::post('saveRecord', 'FinanceController@saveRecord')->middleware('auth');
+Route::post('breakdown/{id}', 'FinanceController@breakdown')->middleware('auth');
+
+/*Reports*/
+Route::get('reports', 'ReportsController@index');
+Route::get('record/{id}', 'ReportsController@view');

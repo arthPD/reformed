@@ -91,9 +91,10 @@
 			</div>
 		</div>
 	</div>
-		<a href="{{ URL::previous() }}"><button class="button is-pulled-right is-info">Back</button></a>
-		</div>
-		<input type="submit" class="is-pulled-right button is-primary" value="{{$submitButton}}">
+	<div class="is-pulled-right">
+		<input type="submit" class="button is-primary" value="{{$submitButton}}">
+		<a href="{{ url("/users") }}"><button type="button" class="button is-info">Back</button></a>
+	</div>
 </form>
 <script>
 </script>
